@@ -23,16 +23,22 @@ const StyledHeroSection = styled.section`
     font-family: var(--font-mono);
     font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
+    
 
     @media (max-width: 480px) {
       margin: 0 0 20px 2px;
     }
+  }
+  h2{
+    font-size: 60px;
+    
   }
 
   h3 {
     margin-top: 5px;
     color: var(--slate);
     line-height: 0.9;
+    font-size:50px;
   }
 
   p {
@@ -61,28 +67,29 @@ const Hero = () => {
 
   const one = <h1>Hola, mi nombre es</h1>;
   const two = <h2 className="big-heading">Jeferson Quiguantar.</h2>;
-  const three = <h3 className="big-heading">Construyo cosas para la web.</h3>;
+  const three = <h3 className="big-heading">Desarrollo experiencias digitales para la Web.</h3>;
   const four = (
     <>
       <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
+      Me dedico a crear experiencias digitales excepcionales que combinan funcionalidad, estética e innovación.{' '}
         <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
+          Sinergy
         </a>
         .
       </p>
+
     </>
   );
   const five = (
+    
     <a
       className="email-link"
       href="https://www.newline.co/courses/build-a-spotify-connected-app"
       target="_blank"
       rel="noreferrer">
-      Check out my course!
+      Visita mi Blog!
     </a>
+    
   );
 
   const items = [one, two, three, four, five];

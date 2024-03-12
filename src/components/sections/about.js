@@ -129,37 +129,36 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
+      <h2 className="numbered-heading">Acerca de mi</h2>
 
       <div className="inner">
         <StyledText>
           <div>
             <p>
               Hola! Mi nombre es Jeferson Quiguantar soy ingeniero y me dedico al desarrollo web, manipulacion y visualizacion 
-              de datos, tambien me gusta el diseño y creacion 3d &amp; !
+              de datos, ademas de diseño y modelado 3d!
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
+              He adquirido experiencia en {' '}
+              <a href="https://www.unicauca.edu.co/versionP/">Universidad del Cauca</a>,{' '}
+              <a href="https://platzi.com/">Una Startup</a>,{' '}
+              <a href="https://www.apple.com/">Institución Universitaria Colegio Mayor del Cauca </a>, and{' '}
+              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. mi enfoque se centra en la
+               construcción de productos y experiencias digitales que sean accesibles 
+               e inclusivas, porque la diversidad nos enriquece y la tecnología debe ser un reflejo de ello. <a href="https://upstatement.com/">Sinergy</a> Para una variedad de clientes
             </p>
 
             <p>
-              I also recently{' '}
+              Recientemente He lanzado pequeñas{' '}
               <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
+                 cosas creativas 
               </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
+              Que pueden ser de tu agrado, he utilizado D3.js 
               &amp; React.
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>Aquí hay algunas tecnologías con las que he estado trabajando recientemente</p>
           </div>
 
           <ul className="skills-list">
@@ -171,7 +170,7 @@ const About = () => {
           <div className="wrapper">
             <StaticImage
               className="img"
-              src="../../images/me.jpg"
+              src="../../images/me.jpeg"
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}

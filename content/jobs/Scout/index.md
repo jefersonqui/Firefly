@@ -1,9 +1,9 @@
 ---
 date: '2017-04-01'
-title: 'Developer'
-company: 'Scout Studio'
-location: 'Northeastern University'
-range: 'Spring 2016 & 2017'
+title: 'Seminario IA'
+company: 'Unimayor'
+location: 'Popayan, CO'
+range: 'Septiembre 2023 - Diciembre 2023'
 url: 'https://web.northeastern.edu/scout/'
 ---
 

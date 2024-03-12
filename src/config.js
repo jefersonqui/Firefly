@@ -1,5 +1,5 @@
 module.exports = {
-  email: 'brittany.chiang@gmail.com',
+  email: 'jeffersonquiguantar@gmail.com',
 
   socialMedia: [
     {
@@ -26,19 +26,19 @@ module.exports = {
 
   navLinks: [
     {
-      name: 'About',
+      name: 'Me',
       url: '/#about',
     },
     {
-      name: 'Experience',
+      name: 'Experiencia',
       url: '/#jobs',
     },
     {
-      name: 'Work',
+      name: 'Creaciones',
       url: '/#projects',
     },
     {
-      name: 'Contact',
+      name: 'Contacto',
       url: '/#contact',
     },
   ],

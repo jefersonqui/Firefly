@@ -1,9 +1,9 @@
 ---
 date: '2017-12-21'
-title: 'UI Engineer Co-op'
-company: 'Apple'
-location: 'Cupertino, CA'
-range: 'July - December 2017'
+title: 'Ingeniero Físico'
+company: 'Unicauca'
+location: 'Popayan, CO'
+range: 'Julio - Deciembre 2023'
 url: 'https://www.apple.com/music/'
 ---
 
