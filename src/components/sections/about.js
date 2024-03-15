@@ -7,12 +7,12 @@ import { usePrefersReducedMotion } from '@hooks';
 // @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 const StyledAboutSection = styled.section`
-  max-width: 900px;
+  max-width: 1200px;  
 
   .inner {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 50px;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 30px;
 
     @media (max-width: 768px) {
       display: block;
@@ -49,7 +49,7 @@ const StyledText = styled.div`
 `;
 const StyledPic = styled.div`
   position: relative;
-  max-width: 300px;
+  max-width: 800px; //////////estaba en 300
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
@@ -85,6 +85,8 @@ const StyledPic = styled.div`
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1);
       transition: var(--transition);
+      
+      
     }
 ///////////////////77
     .superimg{
@@ -99,7 +101,9 @@ const StyledPic = styled.div`
       
     }
     .supertext{
-      font-weight: 400;
+      font-weight: 600;
+      color: var(--lightest-slate);
+      font-size: clamp(34px, 4vw, var(--fz-heading));
     }
 
 
@@ -146,7 +150,7 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">Acerca de mi</h2>
+      <h2 className="numbered-heading">Quiénes Somos</h2>
 
       <div className="inner">
         <StyledText>
@@ -193,7 +197,7 @@ const About = () => {
             
             <StaticImage
               className="img"
-              src="../../images/me.jpeg" 
+              src="../../images/about.jpg" 
               
               width={500}
               quality={95}

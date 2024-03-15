@@ -30,7 +30,8 @@ const StyledHeroSection = styled.section`
     }
   }
   h2{
-    font-size: 60px;
+    font-size: 82px;
+    // font-family:"helvetica";
     
   }
 
