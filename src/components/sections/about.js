@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
+// @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -85,6 +86,22 @@ const StyledPic = styled.div`
       filter: grayscale(100%) contrast(1);
       transition: var(--transition);
     }
+///////////////////77
+    .superimg{
+      position: absolute;
+      top: 70%; 
+      left: 30%; 
+      z-index: 1;
+      color: #fff;
+      font-size:2em;
+      font-family: "SFMonospace";
+      // opacity: 0.5;
+      
+    }
+    .supertext{
+      font-weight: 400;
+    }
+
 
     &:before,
     &:after {
@@ -135,30 +152,34 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hola! Mi nombre es Jeferson Quiguantar soy ingeniero y me dedico al desarrollo web, manipulacion y visualizacion 
-              de datos, ademas de diseño y modelado 3d!
+            Nos especializamos en el desarrollo web, manipulación 
+            y visualización de datos, así como diseño y modelado 3D.
             </p>
 
             <p>
-              He adquirido experiencia en {' '}
+            Nuestra experiencia proviene de colaboraciones con diversas instituciones, como la {' '}
               <a href="https://www.unicauca.edu.co/versionP/">Universidad del Cauca</a>,{' '}
-              <a href="https://platzi.com/">Una Startup</a>,{' '}
-              <a href="https://www.apple.com/">Institución Universitaria Colegio Mayor del Cauca </a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. mi enfoque se centra en la
-               construcción de productos y experiencias digitales que sean accesibles 
-               e inclusivas, porque la diversidad nos enriquece y la tecnología debe ser un reflejo de ello. <a href="https://upstatement.com/">Sinergy</a> Para una variedad de clientes
+              
+              la {' '}
+              <a href="https://www.apple.com/">Institución Universitaria Colegio Mayor del Cauca </a>, {' '}
+                una {' '}
+              <a href="https://platzi.com/"> Startup</a>,{' '}
+              <a href="https://scout.camd.northeastern.edu/">y un estudio de diseño dirigido por estudiantes.</a>. Nuestro enfoque 
+              se centra en la creación de productos y experiencias digitales accesibles e inclusivas. 
+              En BAZAR, creemos que la diversidad enriquece nuestra labor y que la tecnología debe reflejar
+               esa diversidad. Trabajamos con una variedad de <a href="https://upstatement.com/">Clientes</a> para llevar sus ideas al mundo digital.
             </p>
 
             <p>
-              Recientemente He lanzado pequeñas{' '}
+            Recientemente, hemos lanzado algunos{' '}
               <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                 cosas creativas 
+              proyectos creativos 
               </a>{' '}
-              Que pueden ser de tu agrado, he utilizado D3.js 
+              esperamos sean de interés, utilizando tecnologías como D3.js
               &amp; React.
             </p>
 
-            <p>Aquí hay algunas tecnologías con las que he estado trabajando recientemente</p>
+            <p>Aquí hay algunas tecnologías con las que hemos estado trabajando recientemente</p>
           </div>
 
           <ul className="skills-list">
@@ -167,16 +188,26 @@ const About = () => {
         </StyledText>
 
         <StyledPic>
+        
           <div className="wrapper">
+            
             <StaticImage
               className="img"
-              src="../../images/me.jpeg"
+              src="../../images/me.jpeg" 
+              
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}
               alt="Headshot"
             />
+            <StyledText>
+              <div className='superimg'>
+                <p className='supertext'>BAZAR</p>
+              </div>
+            </StyledText>
+
           </div>
+          
         </StyledPic>
       </div>
     </StyledAboutSection>

@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
   flex-direction: column;
-  align-items: flex-start;
+  align-items: space-between;
   min-height: 100vh;
   height: 100vh;
   padding: 0;
@@ -43,7 +43,9 @@ const StyledHeroSection = styled.section`
 
   p {
     margin: 20px 0 0;
-    max-width: 540px;
+    max-width: 740px;
+    font-size:1.1em;
+    text-align:justify;
   }
 
   .email-link {
@@ -65,13 +67,13 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hola, mi nombre es</h1>;
-  const two = <h2 className="big-heading">Jeferson Quiguantar.</h2>;
-  const three = <h3 className="big-heading">Desarrollo experiencias digitales para la Web.</h3>;
+  const one = <h1>¡Hola y bienvenidos!</h1>;
+  const two = <h2 className="big-heading">BAZAR</h2>;
+  const three = <h3 className="big-heading">Desarrollo de experiencias digitales para la web.</h3>;
   const four = (
     <>
       <p>
-      Me dedico a crear experiencias digitales excepcionales que combinan funcionalidad, estética e innovación.{' '}
+      Creamos experiencias digitales excepcionales que combinan funcionalidad, estética e innovación.{'  '}
         <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
           Sinergy
         </a>
@@ -87,10 +89,15 @@ const Hero = () => {
       href="https://www.newline.co/courses/build-a-spotify-connected-app"
       target="_blank"
       rel="noreferrer">
-      Visita mi Blog!
+      Visita el Blog!
     </a>
     
   );
+  //  const six = (
+  //   <div className='containerquiguart'>
+  //     <p className='textquiguarth'>Quiguarth</p>
+  //   </div>
+  // );
 
   const items = [one, two, three, four, five];
 
