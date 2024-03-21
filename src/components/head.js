@@ -60,20 +60,27 @@ const Head = ({ title, description, image }) => {
       <meta name="twitter:image" content={seo.image} />
 
       <meta name="google-site-verification" content="DCl7VAf9tcz6eD9gb67NfkNnJ1PKRNcg8qQiwpbx9Lk" />
-    </Helmet>
-  );
+
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+
+          </link>
+
+        </Helmet>
+        );
 };
 
-export default Head;
+        export default Head;
 
-Head.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  image: PropTypes.string,
+        Head.propTypes = {
+          title: PropTypes.string,
+        description: PropTypes.string,
+        image: PropTypes.string,
 };
 
-Head.defaultProps = {
-  title: null,
-  description: null,
-  image: null,
+        Head.defaultProps = {
+          title: null,
+        description: null,
+        image: null,
 };

@@ -33,13 +33,13 @@ const StyledLoader = styled.div`
       
       }
       svg path{
-        fill: var(--dark-navy);        
+        fill: var(--navy);        
       }
       svg .st1{
-        fill: var(--dark-navy);
+        fill: var(--navy);
       }
       svg .st0{
-        fill: #00f4c5;
+        fill: var(--green);
       }
   }
 `;

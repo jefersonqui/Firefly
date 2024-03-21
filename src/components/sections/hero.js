@@ -3,14 +3,18 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
+import { StaticImage } from 'gatsby-plugin-image';
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
+  
   flex-direction: column;
   align-items: space-between;
   min-height: 100vh;
   height: 100vh;
+  
   padding: 0;
+  
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
     height: auto;
@@ -20,8 +24,8 @@ const StyledHeroSection = styled.section`
   h1 {
     margin: 0 0 30px 4px;
     color: var(--green);
-    font-family: var(--font-mono);
-    font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
+    font-family: "Cutive Mono", monospace;
+    font-size: 20px;//clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
     
 
@@ -39,21 +43,28 @@ const StyledHeroSection = styled.section`
     margin-top: 5px;
     color: var(--slate);
     line-height: 0.9;
-    font-size:50px;
+    font-size:45px;
+    
   }
 
   p {
     margin: 20px 0 0;
     max-width: 740px;
     font-size:1.1em;
-    text-align:justify;
+    // text-align:justify;
+    
   }
+
+
 
   .email-link {
     ${({ theme }) => theme.mixins.bigButton};
     margin-top: 50px;
+    font-size:14px;
   }
 `;
+
+
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -74,7 +85,7 @@ const Hero = () => {
   const four = (
     <>
       <p>
-      Creamos experiencias digitales excepcionales que combinan funcionalidad, estética e innovación.{'  '}
+        Creamos experiencias digitales excepcionales que combinan funcionalidad, estética e innovación.{'  '}
         <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
           Sinergy
         </a>
@@ -84,7 +95,7 @@ const Hero = () => {
     </>
   );
   const five = (
-    
+
     <a
       className="email-link"
       href="https://www.newline.co/courses/build-a-spotify-connected-app"
@@ -92,7 +103,7 @@ const Hero = () => {
       rel="noreferrer">
       Visita el Blog!
     </a>
-    
+
   );
   //  const six = (
   //   <div className='containerquiguart'>
@@ -103,23 +114,31 @@ const Hero = () => {
   const items = [one, two, three, four, five];
 
   return (
+    
     <StyledHeroSection>
+
+
+      
       {prefersReducedMotion ? (
         <>
           {items.map((item, i) => (
             <div key={i}>{item}</div>
+
           ))}
         </>
+
       ) : (
+
         <TransitionGroup component={null}>
           {isMounted &&
             items.map((item, i) => (
               <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
+                <div style={{ transitionDelay: `${i + 2}00ms` }}>{item}</div>
               </CSSTransition>
             ))}
         </TransitionGroup>
       )}
+
     </StyledHeroSection>
   );
 };

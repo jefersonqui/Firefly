@@ -77,10 +77,6 @@ const StyledPic = styled.div`
         transform: translate(8px, 8px);
       }
 
-      .img {
-        filter: none;
-        mix-blend-mode: normal;
-      }
     }
     // &:before,
     // &:after {
@@ -91,6 +87,7 @@ const StyledPic = styled.div`
     //   height: 100%;
     //   border-radius: var(--border-radius);
     //   transition: var(--transition);
+    //   z-index:- 10;
     // }
 
     // &:before {
@@ -130,19 +127,62 @@ const StyledPic = styled.div`
 
         const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
         const material = new THREE.MeshNormalMaterial();
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+        // const mesh = new THREE.Mesh(geometry, material);
+        // scene.add(mesh);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(width_, height_);
-        
+        const mesh = new THREE.Mesh(
+            new THREE.SphereGeometry(0.003,12,12),
+            new THREE.MeshNormalMaterial()
+        );
+        const addPoint = (x,y,z) => {
+            const point = mesh.clone();
+            point.position.set(x,y,z);
+            scene.add(point);
+            return point;
+        };
+        const number = 5000;
+        const objetcts = [];
+
+        for(let i = 0; i < number ; i++){
+            const theta = i/number * Math.PI * 2;
+            const x = Math.cos(theta) * 5;
+            const y = Math.sin(theta) * 5;
+            const z = 0;
+            const mesh = addPoint(x,y,z);
+
+            objetcts.push({
+                mesh,
+                theta,
+                random: Math.random(),
+                x: Math.random()/0.9,
+                y: Math.random()/5,
+                z: Math.random()/0.2,
+                
+            })
+        }
+
         const animation = (time) => {
+            objetcts.forEach((o,i) =>{
+                const {mesh, theta, random,x,y,z} = o;
+                const newx = Math.cos(theta + time/2500) + x
+                const newy = Math.sin(theta + time/2500) + y
+                const newz = z;
+                mesh.position.set(newx,newy,newz)
+            })
             mesh.rotation.x = time / 2000;
-            mesh.rotation.y = time / 1000;
+            mesh.rotation.y = time / 2000;
             renderer.render(scene, camera);
         };
+        
+
 
         renderer.setAnimationLoop(animation);
+        const size = 3;
+        const divisions = 30;
+        const gridHelper = new THREE.GridHelper(size,divisions);
+        // scene.add(gridHelper);
 
         const wrapper = document.querySelector('.wrapper');
         
@@ -163,7 +203,7 @@ const StyledPic = styled.div`
         controls.enablePan = true;
         controls.enableDamping = true;
         controls.dampingFactor = 0.25;
-        setTimeout(handleResize, 100);
+       
 
         return () => {
             scene.remove(mesh);
