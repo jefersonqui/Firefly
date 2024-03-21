@@ -67,10 +67,11 @@ const StyledNav = styled.nav`
 
     a {
       color: var(--green);
-      width: 42px;
-      height: 42px;
+      width: 48px;
+      height: 48px;
       position: relative;
       z-index: 1;
+      
 
       .hex-container {
         position: absolute;
@@ -91,9 +92,12 @@ const StyledNav = styled.nav`
           @media (prefers-reduced-motion: no-preference) {
             transition: var(--transition);
           }
-          polygon {
+          circle {
             fill: var(--navy);
           }
+        }
+        svg path{
+          fill: currentColor;
         }
       }
 
@@ -102,7 +106,7 @@ const StyledNav = styled.nav`
         outline: 0;
         transform: translate(-4px, -4px);
         .hex-container {
-          transform: translate(4px, 3px);
+          transform: translate(3px, 3px);
         }
       }
     }

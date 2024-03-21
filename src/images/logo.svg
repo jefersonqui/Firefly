@@ -1,0 +1,32 @@
+<svg  viewBox="0 0 84 96" fill="none" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+  <g transform="translate(-8.000000, -2.000000)">
+      <g transform="translate(11.000000, 5.000000)">
+        <polygon
+          fill="#020c1b"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          points="39 0 0 22 0 67 39 90 78 68 78 23"
+        />
+        <text 
+          fill='#64ffda'
+          font-Size="45px"
+          transform='translate(78.5,26)'
+          text-anchor="middle"
+          >
+          <tspan 
+            x="0.1416" y="33"     
+            >B</tspan>
+        </text>
+      </g>
+      <path        
+        strokeWidth="5"
+        d="M 50, 5
+                  L 11, 27
+                  L 11, 72
+                  L 50, 95
+                  L 89, 73
+                  L 89, 28 z"
+      />
+    </g>
+</svg>

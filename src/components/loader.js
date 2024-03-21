@@ -14,12 +14,12 @@ const StyledLoader = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--dark-navy);
+  background-color: var(--navy);
   z-index: 99;
 
   .logo-wrapper {
     width: max-content;
-    max-width: 100px;
+    max-width: 400px;
     transition: var(--transition);
     opacity: ${props => (props.isMounted ? 1 : 0)};
     svg {
@@ -29,10 +29,18 @@ const StyledLoader = styled.div`
       margin: 0 auto;
       fill: none;
       user-select: none;
-      #B {
-        opacity: 0;
+      opacity: 1;
+      
       }
-    }
+      svg path{
+        fill: var(--dark-navy);        
+      }
+      svg .st1{
+        fill: var(--dark-navy);
+      }
+      svg .st0{
+        fill: #00f4c5;
+      }
   }
 `;
 
@@ -46,32 +54,54 @@ const Loader = ({ finishLoading }) => {
 
     loader
       .add({
-        targets: '#logo path',
-        delay: 300,
-        duration: 1500,
-        easing: 'easeInOutQuart',
-        strokeDashoffset: [anime.setDashoffset, 0],
+        targets: '#fondo',
+        opacity: [0, 1],
+        duration: 1000,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(300)
+        // strokeDashoffset: [anime.setDashoffset, 0],
       })
       .add({
-        targets: '#logo #B',
-        duration: 700,
-        easing: 'easeInOutQuart',
-        opacity: 1,
+        targets: '#alaIzquierda path',
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100)
       })
       .add({
-        targets: '#logo',
-        delay: 500,
-        duration: 300,
-        easing: 'easeInOutQuart',
+        targets: '#alaDerecha path',
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: '#abdomenIzquierdo',
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: '#abdomenDerecho',
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: '#espiraculo circle',
+        opacity: [0, 1],
+        duration: 500,
+        easing: 'easeInOutQuad',
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: ['#fondo', '#alaIzquierda path', '#alaDerecha path', '#abdomenIzquierdo', '#abdomenDerecho', '#espiraculo circle'],
         opacity: 0,
-        scale: 0.1,
-      })
-      .add({
-        targets: '.loader',
-        duration: 200,
-        easing: 'easeInOutQuart',
-        opacity: 0,
-        zIndex: -1,
+        duration: 400,
+        easing: 'easeInOutQuad',
+        delay: 500 // Ajusta este retraso según tu preferencia
       });
   };
 
