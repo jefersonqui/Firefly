@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
@@ -46,6 +46,7 @@ const StyledLoader = styled.div`
 
 const Loader = ({ finishLoading }) => {
   const [isMounted, setIsMounted] = useState(false);
+ 
 
   const animate = () => {
     const loader = anime.timeline({
@@ -58,7 +59,8 @@ const Loader = ({ finishLoading }) => {
         opacity: [0, 1],
         duration: 1000,
         easing: 'easeInOutQuad',
-        delay: anime.stagger(300)
+        delay: (d, i) => 150 * i + 500,
+        
         // strokeDashoffset: [anime.setDashoffset, 0],
       })
       .add({
@@ -108,13 +110,14 @@ const Loader = ({ finishLoading }) => {
   useEffect(() => {
     const timeout = setTimeout(() => setIsMounted(true), 10);
     animate();
+ 
     return () => clearTimeout(timeout);
   }, []);
 
   return (
-    <StyledLoader className="loader" isMounted={isMounted}>
+    <StyledLoader className="loader" isMounted={isMounted} >
       <Helmet bodyAttributes={{ class: `hidden` }} />
-
+  
       <div className="logo-wrapper">
         <IconLoader />
       </div>
