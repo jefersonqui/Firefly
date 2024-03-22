@@ -210,13 +210,13 @@ const GlobalStyle = createGlobalStyle`
       display: block;
       position: relative;
       top: -5px;
-      width: 300px;
+      width: 1400px;
       height: 1px;
       margin-left: 20px;
       background-color: var(--lightest-navy);
 
       @media (max-width: 1080px) {
-        width: 200px;
+        width: 100vh;
       }
       @media (max-width: 768px) {
         width: 100%;
