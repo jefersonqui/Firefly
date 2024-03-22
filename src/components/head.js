@@ -63,11 +63,9 @@ const Head = ({ title, description, image }) => {
 
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
-
-          </link>
-
-        </Helmet>
+      <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&family=Foldit:wght@100..900&family=Londrina+Shadow&family=Major+Mono+Display&display=swap" rel="stylesheet"></link>
+      </Helmet>
         );
 };
 
