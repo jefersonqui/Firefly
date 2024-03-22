@@ -2,7 +2,7 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Bazar',
+    title: 'Firefly',
     description:
       'Jeferson Quiguantar es un ingeniero Dedicado al desarrollo web y modelado 3d',
     siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
@@ -26,7 +26,7 @@ module.exports = {
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
         display: 'minimal-ui',
-        icon: 'src/images/logo.png', 
+        icon: 'src/images/logohd.png', 
       },
     },
     `gatsby-plugin-offline`,

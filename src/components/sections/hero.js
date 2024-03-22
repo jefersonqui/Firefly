@@ -8,12 +8,14 @@ import { StaticImage } from 'gatsby-plugin-image';
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
   
-  flex-direction: column;
-  align-items: space-between;
-  min-height: 100vh;
-  height: 100vh;
+  // flex-direction: column;
+  // align-items: space-between;
+  // min-height: 100vh;
+     height: 100vh;
+     
+     
   
-  padding: 0;
+  
   
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
@@ -28,16 +30,20 @@ const StyledHeroSection = styled.section`
     font-size: 20px;//clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
     
+    padding:10% 0 5% 0; 
+    
 
     @media (max-width: 480px) {
       margin: 0 0 20px 2px;
     }
   }
   h2{
+    text-align: center;
     font-size: 82px;
     // font-family:"helvetica";
     
   }
+
 
   h3 {
     margin-top: 5px;
@@ -54,7 +60,7 @@ const StyledHeroSection = styled.section`
     // text-align:justify;
     
   }
-
+  
 
 
   .email-link {
@@ -63,6 +69,30 @@ const StyledHeroSection = styled.section`
     font-size:14px;
   }
 `;
+const HeroPath = styled.div`
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-gap: 10px;
+  width: 100%;
+  height: 100%;
+  
+    .Presentation{
+     
+      
+         
+    }
+    .items-div{
+      
+      
+      
+    }
+    
+
+    .adventure{
+      
+      padding:20px;
+    }
+`
 
 
 
@@ -80,8 +110,8 @@ const Hero = () => {
   }, []);
 
   const one = <h1>¡Hola y bienvenidos!</h1>;
-  const two = <h2 className="big-heading">BAZAR</h2>;
-  const three = <h3 className="big-heading">Desarrollo de experiencias digitales para la web.</h3>;
+  const two = <h2 className="big-heading"> Firefly </h2>;
+  const three = <h3 className="big-heading">Revealing hidden beauty</h3>;
   const four = (
     <>
       <p>
@@ -98,10 +128,10 @@ const Hero = () => {
 
     <a
       className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
+      href="https://github.com/jefersonqui"
       target="_blank"
       rel="noreferrer">
-      Visita el Blog!
+      GitHub!
     </a>
 
   );
@@ -111,34 +141,48 @@ const Hero = () => {
   //   </div>
   // );
 
-  const items = [one, two, three, four, five];
+  const items = [one, two, three,four, five];
 
   return (
     
     <StyledHeroSection>
 
 
-      
-      {prefersReducedMotion ? (
-        <>
-          {items.map((item, i) => (
-            <div key={i}>{item}</div>
-
-          ))}
-        </>
-
-      ) : (
-
-        <TransitionGroup component={null}>
-          {isMounted &&
-            items.map((item, i) => (
-              <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                <div style={{ transitionDelay: `${i + 2}00ms` }}>{item}</div>
-              </CSSTransition>
-            ))}
-        </TransitionGroup>
-      )}
-
+      <HeroPath>        
+        <div className='Presentation'>
+          {prefersReducedMotion ? (
+            <>
+              {items.map((item, i) => (
+                <div className='items-div' key={i}>{item}</div>
+          
+              ))}
+            </>
+          
+          ) : (
+          
+            <TransitionGroup component={null}>
+              {isMounted &&
+                items.map((item, i) => (
+                  <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
+                    <div style={{ transitionDelay: `${i + 2}00ms` }}>{item}</div>
+                  </CSSTransition>
+                ))}
+            </TransitionGroup>
+          )}
+        </div>
+        <div className='adventure'>
+        <StaticImage
+              className="img"
+              src="../../images/me.jpeg" 
+              
+              width={500}
+              quality={95}
+              formats={['AUTO', 'WEBP', 'AVIF']}
+              alt="Headshot"
+            />
+        </div>
+        
+      </HeroPath>
     </StyledHeroSection>
   );
 };
