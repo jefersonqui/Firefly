@@ -9,7 +9,7 @@ const variables = css`
     --pink: #f57dff;
     --blue: #57cbff;
     --dark-navy: #020c1b;
-    --navy: #0a192f ; //Color de Fondo
+    --navy: #0a192f; //Color de Fondo
     --light-navy: #112240;
     --lightest-navy: #233554;
     --navy-shadow: rgba(2, 12, 27, 0.7);

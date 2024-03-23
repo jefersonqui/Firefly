@@ -77,7 +77,7 @@ const StyledPic = styled.div`
     
     ${({ theme }) => theme.mixins.boxShadow};
     display: flex;
-    position: absolute;
+    position: relative;
     //  width: 100%;
     // border-radius: var(--border-radius);
     // background-color: var(--green);
@@ -184,10 +184,10 @@ const About = () => {
             base
             childImageSharp {
               gatsbyImageData(
-                width: 900
+                width: 1000
                 height: 600
                 placeholder: BLURRED
-                quality: 70
+                quality: 100
                 blurredOptions: { width: 100 }
               )
             }
@@ -199,7 +199,7 @@ const About = () => {
   const slideShowData = data.slideShow.edges;;
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [sliderIndex, setSliderIndex] = useState(0);
+  // const [sliderIndex, setSliderIndex] = useState(0);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -209,21 +209,21 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const nextSlide = () => {
-    if (sliderIndex === slideShowData.length - 1) {
-      setSliderIndex(0);
-    } else {
-      setSliderIndex(sliderIndex + 1);
-    }
-  };
+  // const nextSlide = () => {
+  //   if (sliderIndex === slideShowData.length - 1) {
+  //     setSliderIndex(0);
+  //   } else {
+  //     setSliderIndex(sliderIndex + 1);
+  //   }
+  // };
 
-  const prevSlide = () => {
-    if (sliderIndex === 0) {
-      setSliderIndex(slideShowData.length - 1);
-    } else {
-      setSliderIndex(sliderIndex - 1);
-    }
-  };
+  // const prevSlide = () => {
+  //   if (sliderIndex === 0) {
+  //     setSliderIndex(slideShowData.length - 1);
+  //   } else {
+  //     setSliderIndex(sliderIndex - 1);
+  //   }
+  // };
 
 
   const skills = ['JavaScript (ES6+)', 'Python', 'React', 'Autocad', 'Blender', 'Matlab'];
@@ -283,12 +283,12 @@ const About = () => {
                 
               ))}
             </Carousel>
-            <StyledText>
+            {/* <StyledText>
               <div className='superimg'>
                 <p className='supertext'>FIREFL-Y</p>
 
               </div>
-            </StyledText>
+            </StyledText> */}
 
           </div>
           <div className='carousel-f'>
@@ -302,28 +302,3 @@ const About = () => {
 };
 
 export default About;
-
-// export const pageQuery = graphql`
-// query {
-//     slideShow: allFile(
-//     filter: {relativeDirectory: {eq: "carousel"}}
-//     sort: {fields: base, order: ASC}
-//   ) {
-//     edges {
-//       node {
-//         id
-//         base
-//         childImageSharp {
-//           gatsbyImageData(
-//             height: 600
-//             width: 900
-//             placeholder: BLURRED
-//             quality: 70
-//             blurredOptions: {width: 100}
-//           )
-//         }
-//       }
-//     }
-//   }
-// }
-// `
