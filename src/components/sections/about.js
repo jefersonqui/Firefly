@@ -76,8 +76,8 @@ const StyledPic = styled.div`
   .wrapper {
     
     ${({ theme }) => theme.mixins.boxShadow};
-    // display: flex;
-    position: relative;
+    display: flex;
+    position: absolute;
     //  width: 100%;
     // border-radius: var(--border-radius);
     // background-color: var(--green);
@@ -184,8 +184,8 @@ const About = () => {
             base
             childImageSharp {
               gatsbyImageData(
-                
-                
+                width: 900
+                height: 600
                 placeholder: BLURRED
                 quality: 70
                 blurredOptions: { width: 100 }
