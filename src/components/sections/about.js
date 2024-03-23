@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
+import { Carousel } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
+import { graphql, useStaticQuery } from "gatsby";
 import { usePrefersReducedMotion } from '@hooks';
-// @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 
 const StyledAboutSection = styled.section`
   max-width: 1400px;  
@@ -71,12 +74,12 @@ const StyledPic = styled.div`
 
 
   .wrapper {
-    border: 2px solid red;
+    
     ${({ theme }) => theme.mixins.boxShadow};
-    display: flex;
+    // display: flex;
     position: relative;
-    // width: 100%;
-    border-radius: var(--border-radius);
+    //  width: 100%;
+    // border-radius: var(--border-radius);
     // background-color: var(--green);
 
 
@@ -97,16 +100,17 @@ const StyledPic = styled.div`
 
     .img {
       position: relative;
-      border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
-      transition: var(--transition);
+      // border-radius: var(--border-radius);
+      // mix-blend-mode: multiply;
+      // filter: grayscale(100%) contrast(1);
+      // transition: var(--transition);
+
       left: 0;
       margin:0;
       right: 0;
       top: 0;
       max-width: none;
-      width:100%;
+
       
       
       
@@ -130,13 +134,7 @@ const StyledPic = styled.div`
       
       font-family: "Bungee";
       opacity: 0.1;
-      // @media (max-width: 1080px) {
-      //   font-size: 30px;
-      //   margin: 0 auto;
-      // }
-      // @media (max-width: 768px) {
-      //   font-size: 30px;
-      // }
+
     }
 
 
@@ -148,7 +146,7 @@ const StyledPic = styled.div`
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: var(--border-radius);
+      // border-radius: var(--border-radius);
       transition: var(--transition);
     }
 
@@ -160,7 +158,7 @@ const StyledPic = styled.div`
     }
 
     &:after {
-      border: 2px solid var(--green);
+      // border: 2px solid var(--green);
       top: 14px;
       left: 14px;
       z-index: -1;
@@ -169,13 +167,39 @@ const StyledPic = styled.div`
   .carousel-f{
     margin-top:20px;
     padding: 10px;
-    border: 2px solid red;
+    
   }
 `;
 
 const About = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      slideShow: allFile(
+        filter: { relativeDirectory: { eq: "carousel" } }
+        sort: { fields: base, order: ASC }
+      ) {
+        edges {
+          node {
+            id
+            base
+            childImageSharp {
+              gatsbyImageData(
+                
+                
+                placeholder: BLURRED
+                quality: 70
+                blurredOptions: { width: 100 }
+              )
+            }
+          }
+        }
+      }
+    }
+  `);
+  const slideShowData = data.slideShow.edges;;
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const [sliderIndex, setSliderIndex] = useState(0);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -185,12 +209,8 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const [sliderIndex, setSliderIndex] = useState(0);
-  const images = ['../../images/m1.gif', 
-  '../../images/m2.png', 
-  '../../images/m3.gif'];
   const nextSlide = () => {
-    if (sliderIndex === images.length - 1) {
+    if (sliderIndex === slideShowData.length - 1) {
       setSliderIndex(0);
     } else {
       setSliderIndex(sliderIndex + 1);
@@ -199,7 +219,7 @@ const About = () => {
 
   const prevSlide = () => {
     if (sliderIndex === 0) {
-      setSliderIndex(images.length - 1);
+      setSliderIndex(slideShowData.length - 1);
     } else {
       setSliderIndex(sliderIndex - 1);
     }
@@ -255,14 +275,14 @@ const About = () => {
         <StyledPic>
 
           <div className="wrapper">
-
-            <StaticImage
-              className="img"
-              src={images[sliderIndex]}
-              quality={95}
-              formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot"
-            />
+            <Carousel>
+              {slideShowData.map(({ node }) => (                
+                  <Carousel.Item key={node.id}>
+                    <GatsbyImage image={node.childImageSharp.gatsbyImageData} alt={node.base} />
+                  </Carousel.Item>
+                
+              ))}
+            </Carousel>
             <StyledText>
               <div className='superimg'>
                 <p className='supertext'>FIREFL-Y</p>
@@ -272,8 +292,7 @@ const About = () => {
 
           </div>
           <div className='carousel-f'>
-            <button onClick={prevSlide}>Anterior</button>
-            <button onClick={nextSlide}>Siguiente</button>
+ 
           </div>
 
         </StyledPic>
@@ -283,3 +302,28 @@ const About = () => {
 };
 
 export default About;
+
+// export const pageQuery = graphql`
+// query {
+//     slideShow: allFile(
+//     filter: {relativeDirectory: {eq: "carousel"}}
+//     sort: {fields: base, order: ASC}
+//   ) {
+//     edges {
+//       node {
+//         id
+//         base
+//         childImageSharp {
+//           gatsbyImageData(
+//             height: 600
+//             width: 900
+//             placeholder: BLURRED
+//             quality: 70
+//             blurredOptions: {width: 100}
+//           )
+//         }
+//       }
+//     }
+//   }
+// }
+// `

@@ -21,8 +21,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: var(--lightest-navy);
-    color: var(--lightest-slate);
+    background-color: var(--lightest-navy) !important;
+    color: var(--lightest-slate) !important;
   }
 
   /* Provide basic, default focus styles.*/
@@ -59,11 +59,11 @@ const GlobalStyle = createGlobalStyle`
     width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--navy);
+    background: var(--navy) !important;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--dark-slate);
-    border: 3px solid var(--navy);
+    background-color: var(--dark-slate) !important;
+    border: 3px solid var(--navy) !important;
     border-radius: 10px;
   }
 
@@ -74,10 +74,10 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--navy);
-    color: var(--slate);
+    background-color: var(--navy) !important;
+    color: var(--slate) !important;
     font-family: var(--font-sans);
-    font-size: var(--fz-xl);
+    font-size: var(--fz-xl) ;
     line-height: 1.3;
 
     @media (max-width: 480px) {
@@ -92,7 +92,7 @@ const GlobalStyle = createGlobalStyle`
       overflow: hidden;
 
       header {
-        background-color: transparent;
+        background-color: transparent ;
       }
 
       #content > * {
@@ -213,7 +213,7 @@ const GlobalStyle = createGlobalStyle`
       width: 1400px;
       height: 1px;
       margin-left: 20px;
-      background-color: var(--lightest-navy);
+      background-color: var(--lightest-navy) ;
 
       @media (max-width: 1080px) {
         width: 100vh;

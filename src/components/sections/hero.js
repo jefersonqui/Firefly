@@ -19,6 +19,7 @@ const StyledHeroSection = styled.section`
   
 
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
+    
     height: auto;
     padding-top: var(--nav-height);
   }
@@ -35,6 +36,7 @@ const StyledHeroSection = styled.section`
 
     @media (max-width: 480px) {
       margin: 0 0 20px 2px;
+
     }
   }
   h2{
@@ -44,6 +46,10 @@ const StyledHeroSection = styled.section`
     font-optical-sizing: auto;
     font-weight:200;
     letter-spacing: 0.18em;
+    @media (max-width: 480px) {
+      font-size: 82px;
+      
+    }
     
   }
 
