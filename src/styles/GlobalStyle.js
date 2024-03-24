@@ -21,8 +21,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: var(--lightest-navy) !important;
-    color: var(--lightest-slate) !important;
+    background-color: var(--lightest-navy) ;
+    color: var(--lightest-slate) ;
   }
 
   /* Provide basic, default focus styles.*/
@@ -59,11 +59,11 @@ const GlobalStyle = createGlobalStyle`
     width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--navy) !important;
+    background: var(--navy) ;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--dark-slate) !important;
-    border: 3px solid var(--navy) !important;
+    background-color: var(--dark-slate) ;
+    border: 3px solid var(--navy) ;
     border-radius: 10px;
   }
 
@@ -74,8 +74,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--navy) !important;
-    color: var(--slate) !important;
+    background-color: var(--navy) ;
+    color: var(--slate) ;
     font-family: var(--font-sans);
     font-size: var(--fz-xl) ;
     line-height: 1.3;

@@ -27,13 +27,13 @@ const variables = css`
       sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
-    --fz-xxs: 15px;
-    --fz-xs: 16px;
+    --fz-xxs: 11px;
+    --fz-xs: 12px;
     --fz-sm: 14px;
     --fz-md: 16px;
-    --fz-lg: 18px;
-    --fz-xl: 20px;
-    --fz-xxl: 22px;
+    --fz-lg: 16px;
+    --fz-xl: 16px;
+    --fz-xxl: 18px;
     --fz-heading: 32px;
 
     --border-radius: 4px;

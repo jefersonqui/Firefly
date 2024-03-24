@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Carousel } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Carousel } from "react-bootstrap";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
@@ -275,14 +275,14 @@ const About = () => {
         <StyledPic>
 
           <div className="wrapper">
-            <Carousel>
+            
               {slideShowData.map(({ node }) => (                
-                  <Carousel.Item key={node.id}>
+                  // <Carousel.Item key={node.id}>
                     <GatsbyImage image={node.childImageSharp.gatsbyImageData} alt={node.base} />
-                  </Carousel.Item>
+                  // </Carousel.Item>
                 
               ))}
-            </Carousel>
+            
             {/* <StyledText>
               <div className='superimg'>
                 <p className='supertext'>FIREFL-Y</p>

@@ -68,7 +68,7 @@ const StyledHeroSection = styled.section`
   p {
     margin: 20px 0 0;
     max-width: 100%;
-    font-size:1.3em;
+    font-size:1.2em;
     // font-family:"Cutive Mono", monospace;
     // text-align:justify;
     
