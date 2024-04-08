@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 
+
 const StyledContent = styled.div`
   display: flex;
   flex-direction: column;

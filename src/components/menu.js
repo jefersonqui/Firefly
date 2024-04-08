@@ -113,6 +113,7 @@ const StyledSidebar = styled.aside`
     color: var(--lightest-slate);
     font-family: var(--font-mono);
     text-align: center;
+    
   }
 
   ol {
@@ -253,23 +254,28 @@ const Menu = () => {
         </StyledHamburgerButton>
 
         <StyledSidebar menuOpen={menuOpen} aria-hidden={!menuOpen} tabIndex={menuOpen ? 1 : -1}>
-          <nav ref={navRef}>
-            {navLinks && (
-              <ol>
-                {navLinks.map(({ url, name }, i) => (
-                  <li key={i}>
-                    <Link to={url} onClick={() => setMenuOpen(false)}>
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-            )}
-
-            <a href="/resume.pdf" className="resume-link">
-              Resume
-            </a>
-          </nav>
+          <div className='MenuOpenContainer'>
+            <nav ref={navRef}>
+              {navLinks && (
+                <ol>
+                  {navLinks.map(({ url, name }, i) => (
+                    <li key={i}>
+                      <Link to={url} onClick={() => setMenuOpen(false)}>
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            
+            
+            </nav>
+            <div>
+              <a href="/resume.pdf" className="resume-link">
+                Login
+              </a>
+            </div>
+          </div>
         </StyledSidebar>
       </div>
     </StyledMenu>

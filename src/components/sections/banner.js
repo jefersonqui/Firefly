@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-// @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+const random = require('canvas-sketch-util/random');
+const math = require('canvas-sketch-util/math');
+
 
 const StyledBannerSection = styled.section`
   max-width: 1200px;  
@@ -78,166 +78,122 @@ const StyledPic = styled.div`
       }
 
     }
-    // &:before,
-    // &:after {
-    //   content: '';
-    //   display: block;
-    //   position: absolute;
-    //   width: 100%;
-    //   height: 100%;
-    //   border-radius: var(--border-radius);
-    //   transition: var(--transition);
-    //   z-index:- 10;
-    // }
-
-    // &:before {
-    //   top: 0;
-    //   left: 0;
-    //   background-color: var(--navy);
-    //   mix-blend-mode: screen;
-    // }
-
-    // &:after {
-    //   border: 2px solid var(--green);
-    //   top: 14px;
-    //   left: 14px;
-    //   z-index: -1;
-    // }
+  
   }
 `;
-  const Banner = () => {
-    const revealContainer = useRef(null);
-    const prefersReducedMotion = usePrefersReducedMotion();
-    
 
-    useEffect(() => {
-        if (prefersReducedMotion) {
-            return;
+const Banner = () => {
+  const canvasRef = useRef(null);
+  const skills = ['Three.js', 'React'];
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const agents = [];
+    for (let i = 0; i < 40; i++) {
+      const x = random.range(0, width);
+      const y = random.range(0, height);
+      agents.push(new Agent(x, y));
+    }
+
+    const render = () => {
+      context.fillStyle = '#0a192f';
+      context.fillRect(0, 0, width, height);
+      agents.forEach(agent => {
+        agent.update();
+        agent.draw(context);
+        agent.bounce(width, height);
+      });
+      for (let i = 0; i < agents.length; i++) {
+        const agent = agents[i];
+        for (let j = i + 1; j < agents.length; j++) {
+          const other = agents[j];
+          const dist = agent.pos.getDistance(other.pos);
+          const fill = context.createLinearGradient(0, 0, width, height);
+          fill.addColorStop(0, 'blue');
+          fill.addColorStop(1, 'yellow');
+
+          if (dist > 200) continue;
+          context.lineWidth = math.mapRange(dist, 0, 200, 5, 0.5);
+          context.beginPath();
+          context.strokeStyle = fill;
+          context.moveTo(agent.pos.x, agent.pos.y);
+          context.lineTo(other.pos.x, other.pos.y);
+          context.stroke();
         }
+      }
+      requestAnimationFrame(render);
+    };
 
-        const width_ = window.innerWidth, height_ = window.innerHeight;
-        
-        const camera = new THREE.PerspectiveCamera(70, width_ / height_, 0.01, 10);
-        camera.position.z = 1;
-        camera.position.y = 1;
-        camera.position.x = 1;
-        camera.lookAt(0,0,0);
+    render();
 
-        const scene = new THREE.Scene();
+    return () => cancelAnimationFrame(render);
+  }, []);
 
-        const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-        const material = new THREE.MeshNormalMaterial();
-        // const mesh = new THREE.Mesh(geometry, material);
-        // scene.add(mesh);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(width_, height_);
-        const mesh = new THREE.Mesh(
-            new THREE.SphereGeometry(0.003,12,12),
-            new THREE.MeshNormalMaterial()
-        );
-        const addPoint = (x,y,z) => {
-            const point = mesh.clone();
-            point.position.set(x,y,z);
-            scene.add(point);
-            return point;
-        };
-        const number = 5000;
-        const objetcts = [];
-
-        for(let i = 0; i < number ; i++){
-            const theta = i/number * Math.PI * 2;
-            const x = Math.cos(theta) * 5;
-            const y = Math.sin(theta) * 5;
-            const z = 0;
-            const mesh = addPoint(x,y,z);
-
-            objetcts.push({
-                mesh,
-                theta,
-                random: Math.random(),
-                x: Math.random()/0.9,
-                y: Math.random()/5,
-                z: Math.random()/0.2,
-                
-            })
-        }
-
-        const animation = (time) => {
-            objetcts.forEach((o,i) =>{
-                const {mesh, theta, random,x,y,z} = o;
-                const newx = Math.cos(theta + time/2500) + x
-                const newy = Math.sin(theta + time/2500) + y
-                const newz = z;
-                mesh.position.set(newx,newy,newz)
-            })
-            mesh.rotation.x = time / 2000;
-            mesh.rotation.y = time / 2000;
-            renderer.render(scene, camera);
-        };
-        
-
-
-        renderer.setAnimationLoop(animation);
-        const size = 3;
-        const divisions = 30;
-        const gridHelper = new THREE.GridHelper(size,divisions);
-        // scene.add(gridHelper);
-
-        const wrapper = document.querySelector('.wrapper');
-        
-
-        const handleResize = () => {
-            const width = wrapper.clientWidth;
-            const height = wrapper.clientHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        };
-
-        window.addEventListener('resize', handleResize);
-        wrapper.appendChild(renderer.domElement);
-        const controls = new OrbitControls(camera,renderer.domElement);
-        
-        controls.enableZoom = true;
-        controls.enablePan = true;
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-       
-
-        return () => {
-            scene.remove(mesh);
-            renderer.dispose();
-            window.removeEventListener('resize', handleResize);
-            wrapper.removeChild(renderer.domElement);
-            controls.dispose();
-        };
-    }, []);
-
-    const skills = ['Three.js', 'React'];
-
-    return (
-        <StyledBannerSection id="about" ref={revealContainer}>
-            <h2 className="numbered-heading">Animation</h2>
-            <div className="inner">
-                <StyledText>
-                    <div>
-                        <p>
-                            Nos especializamos en el desarrollo web, manipulación
-                            y visualización de datos, así como diseño y modelado 3D.
-                        </p>
-                        <p>Tecnologías usadas:</p>
-                    </div>
-                    <ul className="skills-list">
-                        {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-                    </ul>
-                </StyledText>
-                <StyledPic>
-                    <div className="wrapper"></div>
-                </StyledPic>
-            </div>
-        </StyledBannerSection>
-    );
+  return (
+    <StyledBannerSection id="about">
+      <h2 className="numbered-heading">Animation</h2>
+      <div className="inner">
+        <StyledText>
+          <div>
+            <p>
+              Nos especializamos en el desarrollo web, manipulación
+              y visualización de datos, así como diseño y modelado 3D.
+            </p>
+            <p>Tecnologías usadas:</p>
+          </div>
+          <ul className="skills-list">
+            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+          </ul>
+        </StyledText>
+        <StyledPic>
+          <canvas ref={canvasRef} width={600} height={400}></canvas>
+        </StyledPic>
+      </div>
+    </StyledBannerSection>
+  );
 };
+class Vector {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
 
+  }
+  getDistance(v) {
+    const dx = this.x - v.x;
+    const dy = this.y - v.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+}
+class Agent {
+  constructor(x, y) {
+    this.pos = new Vector(x, y);
+    this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
+    this.radius = random.range(4, 12);
+  }
+  bounce(width, height) {
+    if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
+    if (this.pos.y <= 0 || this.pos.y >= height) this.vel.y *= -1;
+  }
+  update() {
+    this.pos.x += this.vel.x;
+    this.pos.y += this.vel.y;
+  }
+  draw(context) {
+
+    context.save();
+
+    context.translate(this.pos.x, this.pos.y);
+    context.lineWidth = 4;
+    context.beginPath();
+    context.strokeStyle = '#41EAD4';
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
+    context.stroke();
+    context.fillStyle = '#0a192f';
+    context.fill();
+    context.restore();
+  }
+}
 export default Banner;

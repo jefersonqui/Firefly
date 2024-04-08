@@ -34,6 +34,9 @@ const mixins = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // display:grid;
+    // grid-template-columns: 1fr 1fr 1fr;
+    // background-color:red;
   `,
 
   link: css`
