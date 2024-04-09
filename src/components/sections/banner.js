@@ -186,9 +186,7 @@ class Agent {
     this.pos.y += this.vel.y;
   }
   draw(context) {
-
     context.save();
-
     context.translate(this.pos.x, this.pos.y);
     context.lineWidth = 'orange';
     context.beginPath();
@@ -196,8 +194,7 @@ class Agent {
     context.fillStyle = 'orange';
     context.moveTo(0, -this.radius);
     context.lineTo(-this.radius * Math.sqrt(3) / 2, this.radius / 2);
-    context.lineTo(this.radius * Math.sqrt(3) / 2, this.radius / 2);
-    // context.arc(0, 0, this.radius, 0, Math.PI * 2);
+    context.lineTo(this.radius * Math.sqrt(3) / 2, this.radius / 2);    
     context.stroke();
     context.fillStyle = 'orange';
     context.fill();
