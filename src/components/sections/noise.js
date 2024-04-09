@@ -63,6 +63,13 @@ const StyledPic = styled.div`
 
   canvas {
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
+   width: 100%;
+   height: 100%;
+    @media (max-width: 768px) {
+      margin: 50px auto 0;
+      width: 100%;
+      height: 150%;
+    }
   }
 
   .wrapper {
