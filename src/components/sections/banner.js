@@ -6,6 +6,7 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
+import { noise2D } from 'canvas-sketch-util/random';
 
 
 const StyledBannerSection = styled.section`
@@ -51,13 +52,17 @@ const StyledText = styled.div`
 `;
 const StyledPic = styled.div`
   position: relative;
-  max-width: 800px; //////////estaba en 300
+  max-width: 800px; 
+  
   
   
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
     width: 70%;
+  }
+  canvas {
+    box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
   }
 
   .wrapper {
@@ -84,7 +89,7 @@ const StyledPic = styled.div`
 
 const Banner = () => {
   const canvasRef = useRef(null);
-  const skills = ['Three.js', 'React'];
+  const skills = ['Three.js', 'canvas-sketch','d3.js','p5.js'];
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -92,7 +97,7 @@ const Banner = () => {
     const height = canvas.height;
 
     const agents = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 15; i++) {
       const x = random.range(0, width);
       const y = random.range(0, height);
       agents.push(new Agent(x, y));
@@ -112,11 +117,11 @@ const Banner = () => {
           const other = agents[j];
           const dist = agent.pos.getDistance(other.pos);
           const fill = context.createLinearGradient(0, 0, width, height);
-          fill.addColorStop(0, 'blue');
+          fill.addColorStop(0, 'white');
           fill.addColorStop(1, 'yellow');
 
           if (dist > 200) continue;
-          context.lineWidth = math.mapRange(dist, 0, 200, 5, 0.5);
+          context.lineWidth = math.mapRange(dist, 0, 400, 0.1, 0.2);
           context.beginPath();
           context.strokeStyle = fill;
           context.moveTo(agent.pos.x, agent.pos.y);
@@ -134,13 +139,12 @@ const Banner = () => {
 
   return (
     <StyledBannerSection id="about">
-      <h2 className="numbered-heading">Animation</h2>
+      <h2 className="numbered-heading">Canvas-sketch</h2>
       <div className="inner">
         <StyledText>
           <div>
             <p>
-              Nos especializamos en el desarrollo web, manipulación
-              y visualización de datos, así como diseño y modelado 3D.
+              Toda la potencialidad de canvas-sketch para animaciones y otras herramientas
             </p>
             <p>Tecnologías usadas:</p>
           </div>
@@ -149,7 +153,7 @@ const Banner = () => {
           </ul>
         </StyledText>
         <StyledPic>
-          <canvas ref={canvasRef} width={600} height={400}></canvas>
+          <canvas ref={canvasRef} width={600} height={100}></canvas>
         </StyledPic>
       </div>
     </StyledBannerSection>
@@ -171,7 +175,7 @@ class Agent {
   constructor(x, y) {
     this.pos = new Vector(x, y);
     this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
-    this.radius = random.range(4, 12);
+    this.radius = random.range(2, 5);
   }
   bounce(width, height) {
     if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
@@ -186,12 +190,16 @@ class Agent {
     context.save();
 
     context.translate(this.pos.x, this.pos.y);
-    context.lineWidth = 4;
+    context.lineWidth = 'orange';
     context.beginPath();
-    context.strokeStyle = '#41EAD4';
-    context.arc(0, 0, this.radius, 0, Math.PI * 2);
+    context.strokeStyle = 'orange';
+    context.fillStyle = 'orange';
+    context.moveTo(0, -this.radius);
+    context.lineTo(-this.radius * Math.sqrt(3) / 2, this.radius / 2);
+    context.lineTo(this.radius * Math.sqrt(3) / 2, this.radius / 2);
+    // context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.stroke();
-    context.fillStyle = '#0a192f';
+    context.fillStyle = 'orange';
     context.fill();
     context.restore();
   }
