@@ -65,6 +65,7 @@ const StyledPic = styled.div`
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
    width: 100%;
    height: 100%;
+   
     @media (max-width: 768px) {
       margin: 50px auto 0;
       width: 100%;
@@ -97,12 +98,14 @@ const params = {
   size: 10,
   scaleMin: 0.5,
   scaleMax: 10,
-  freq: 0.001,
-  amp: 0.2,
+  freq: -0.007,
+  amp: 0.06,
   frame: 0,
   animate: true,
   lineCap: 'butt',
-  shape: 'square',
+  shape: 'circle',
+  color: 'blue',
+  overlay: 'rgb(66, 255, 0)',
 };
 const PaneContainer = () => {
   const paneRef = useRef(null);
@@ -110,14 +113,17 @@ const PaneContainer = () => {
   useEffect(() => {
     const pane = new Pane();
     let f;
-    f = pane.addFolder({ title: 'Grid', expanded: true, });
+    f = pane.addFolder({ title: 'Firefl-y Grid', expanded: true, });
     f.addBinding(params, 'lineCap', { options: { butt: 'butt', round: 'round', square: 'square' } });
     f.addBinding(params, 'cols', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'rows', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'scaleMin', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'scaleMax', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'overlay'),{color: {type: 'float'}} 
+      
+    
 
-    f = pane.addFolder({ title: 'Noise', expanded: true, }).on('change', () => canvasSketch(sketch, settings));
+    f = pane.addFolder({ title: 'Firefl-y Noise', expanded: true, }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'freq', { min: -0.01, max: 0.01 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'amp', { min: 0, max: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'animate');
@@ -158,7 +164,7 @@ const Noise = () => {
     const context = canvas.getContext('2d');
     const width = canvas.width;
     const height = canvas.height;
-
+    
     const render = ({ frame, scale }) => {
 
       context.clearRect(0, 0, width, height);
@@ -207,18 +213,18 @@ const Noise = () => {
           case 'square':
             context.moveTo(w * -0.5, 0);
             context.lineTo(w * 0.5, 0);
-            context.strokeStyle = 'blue';
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
           case 'rectangle':
             context.rect(w * -0.5, -h * 0.5, w, h);
-            context.strokeStyle = 'blue';
+            context.strokeStyle =  params.overlay;
             context.stroke();
             break;
           case 'circle':
             context.arc(0, 0, w * 0.5, 0, Math.PI * 2);
-            context.strokeStyle = 'orange';
-            context.stroke();
+            context.strokeStyle =  params.overlay;
+             context.stroke();
             break;
           case 'spiral':
             const numSpirals = 1; // Número de espirales
@@ -233,7 +239,7 @@ const Noise = () => {
                 const y = radius * Math.sin(angle);
                 context.lineTo(x, y);
               }
-              context.strokeStyle = 'blue';
+              context.strokeStyle = params.overlay;
               context.stroke();
             }
             break;
@@ -242,7 +248,7 @@ const Noise = () => {
             context.lineTo(w * 0.5, h * 0.5);
             context.lineTo(w * -0.5, h * 0.5);
             context.closePath();
-            context.strokeStyle = 'blue';
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
           case 'pentagon':
@@ -258,7 +264,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = 'red';
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
           case 'hexagon':
@@ -274,7 +280,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = 'green';
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
           case 'star':
@@ -292,7 +298,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = 'blue';
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
             case 'cone':
@@ -307,7 +313,7 @@ const Noise = () => {
               context.moveTo(-coneRadius, 0);
               context.lineTo(0, -coneHeight);
               context.lineTo(coneRadius, 0);
-              context.strokeStyle = 'orange';
+              context.strokeStyle = params.overlay;
               context.stroke();
               break;
               case 'sphere':
@@ -321,7 +327,7 @@ const Noise = () => {
                 context.lineTo(0, sphereRadius);
                 context.moveTo(-sphereRadius, 0);
                 context.lineTo(sphereRadius, 0);
-                context.strokeStyle = 'purple';
+                context.strokeStyle = params.overlay;
                 context.stroke();
                 break;
           default:
