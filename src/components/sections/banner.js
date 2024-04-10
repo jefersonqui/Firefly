@@ -55,16 +55,16 @@ const StyledPic = styled.div`
   max-width: 800px; 
   @media (max-width: 768px) {
     margin: 50px auto 0;
-    width: 70%;
+    width: 100%;
   }
   canvas {
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
-  //  width: 100%;
-  //  height: 100%;
+ 
     @media (max-width: 768px) {
-     
-      width: 300px;
-      height: 150%;
+      
+      aling-items: center;
+      width: 350px;
+      height: 150px;
     }
   }
 

@@ -12,11 +12,12 @@ import Variables from '../../styles/variables';
 
 const StyledBannerSection = styled.section`
   max-width: 1200px;  
-
+  
   .inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
+   
 
     @media (max-width: 768px) {
       display: block;
@@ -33,20 +34,24 @@ const StyledPic = styled.div`
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
-    width: 70%;
+    width: 100%;
+    display: block;
+    
+
   }
 
   canvas {
+    max-width: 850px;
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);  
     @media (max-width: 768px) {     
-      width: 350px;
+      width: 400px;
       height: auto;
     }
   }
   .panel{
      position: absolute;
      top: 20px;
-     left: 1060px ;
+     left: 130px ;
      transform: translateX(-50%);
      z-index: 10;
      @media (max-width: 768px) {
@@ -70,17 +75,15 @@ const StyledPic = styled.div`
     white-space: nowrap;
     @media (max-width: 768px) {
       position: relative; 
+    
+      text-align: center;
       top: auto; 
       left: auto; 
-      transform:
-      font-size: 30px; 
+      
+      font-size: 20px; 
     }
     }
-    h4{
-      position: absolute;
-      top: 275px;
-    left: 300px;
-    }
+   
 
 
 `;
@@ -148,7 +151,7 @@ const PaneContainer = () => {
 };
 const Noise = () => {
   const canvasRef = useRef(null);
-  
+
 
 
 
@@ -351,19 +354,20 @@ const Noise = () => {
 
   return (
     <>
-    
+
       <StyledBannerSection id="#">
         <h2 className="numbered-heading">Noise</h2>
         <div className="inner">
           <StyledPic>
+          <div className='texto' >
+              <p>Firefl-y Animation</p>              
+            </div>
             <canvas ref={canvasRef} width={1200} height={500}></canvas>
+
             <div className='panel'>
               <PaneContainer />
             </div>
-            {/* <div className='texto' >
-              <p>Firefl-y Animation</p>
-              <h4 className='subtitle'>Control Panel Parameters</h4>
-            </div> */}
+
           </StyledPic>
         </div>
       </StyledBannerSection>
