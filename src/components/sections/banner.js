@@ -59,11 +59,11 @@ const StyledPic = styled.div`
   }
   canvas {
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
-   width: 100%;
-   height: 100%;
+  //  width: 100%;
+  //  height: 100%;
     @media (max-width: 768px) {
-      margin: 50px auto 0;
-      width: 100%;
+     
+      width: 300px;
       height: 150%;
     }
   }
@@ -100,7 +100,7 @@ const Banner = () => {
     const height = canvas.height;
 
     const agents = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i <15; i++) {
       const x = random.range(0, width);
       const y = random.range(0, height);
       agents.push(new Agent(x, y));
@@ -123,7 +123,7 @@ const Banner = () => {
           fill.addColorStop(0, 'white');
           fill.addColorStop(1, 'yellow');
 
-          if (dist > 200) continue;
+          if (dist > 90) continue;
           context.lineWidth = math.mapRange(dist, 0, 400, 0.1, 0.2);
           context.beginPath();
           context.strokeStyle = fill;
@@ -141,7 +141,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <StyledBannerSection id="about">
+    <StyledBannerSection id="#">
       <h2 className="numbered-heading">Canvas-sketch</h2>
       <div className="inner">
         <StyledText>
@@ -156,7 +156,7 @@ const Banner = () => {
           </ul>
         </StyledText>
         <StyledPic>
-          <canvas ref={canvasRef} width={600} height={100}></canvas>
+          <canvas ref={canvasRef} width={600} height={150}></canvas>
         </StyledPic>
       </div>
     </StyledBannerSection>
@@ -177,8 +177,8 @@ class Vector {
 class Agent {
   constructor(x, y) {
     this.pos = new Vector(x, y);
-    this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
-    this.radius = random.range(2, 5);
+    this.vel = new Vector(random.range(-0.3, 2), random.range(-0.5,2));
+    this.radius = random.range(3, 3);
   }
   bounce(width, height) {
     if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
@@ -191,15 +191,12 @@ class Agent {
   draw(context) {
     context.save();
     context.translate(this.pos.x, this.pos.y);
-    context.lineWidth = 'orange';
-    context.beginPath();
-    context.strokeStyle = 'orange';
-    context.fillStyle = 'orange';
+    context.beginPath(); 
     context.moveTo(0, -this.radius);
     context.lineTo(-this.radius * Math.sqrt(3) / 2, this.radius / 2);
     context.lineTo(this.radius * Math.sqrt(3) / 2, this.radius / 2);    
     context.stroke();
-    context.fillStyle = 'orange';
+    context.fillStyle = 'yellow';
     context.fill();
     context.restore();
   }

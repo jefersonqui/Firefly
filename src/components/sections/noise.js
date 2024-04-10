@@ -7,6 +7,7 @@ const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
 import { Pane } from 'tweakpane';
 import { shape } from 'prop-types';
+import Variables from '../../styles/variables';
 
 
 const StyledBannerSection = styled.section`
@@ -14,7 +15,7 @@ const StyledBannerSection = styled.section`
 
   .inner {
     display: grid;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
 
     @media (max-width: 768px) {
@@ -23,34 +24,8 @@ const StyledBannerSection = styled.section`
   }
 `;
 
-const StyledText = styled.div`
-  ul.skills-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    grid-gap: 0 10px;
-    padding: 0;
-    margin: 20px 0 0 0;
-    overflow: hidden;
-    list-style: none;
 
-    li {
-      position: relative;
-      margin-bottom: 10px;
-      padding-left: 20px;
-      font-family: var(--font-mono);
-      font-size: var(--fz-xs);
 
-      &:before {
-        content: '▹';
-        position: absolute;
-        left: 0;
-        color: var(--green);
-        font-size: var(--fz-sm);
-        line-height: 12px;
-      }
-    }
-  }
-`;
 
 const StyledPic = styled.div`
   position: relative;
@@ -62,34 +37,52 @@ const StyledPic = styled.div`
   }
 
   canvas {
-    box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);
-   width: 100%;
-   height: 100%;
-   
+    box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);  
+    @media (max-width: 768px) {     
+      width: 350px;
+      height: auto;
+    }
+  }
+  .panel{
+     position: absolute;
+     top: 20px;
+     left: 1060px ;
+     transform: translateX(-50%);
+     z-index: 10;
+     @media (max-width: 768px) {
+      position: relative; 
+      top: 0; 
+      left: 0; 
+      transform: none; 
+    }
+  }
+
+  .texto p{
+    
+    width: 200px;
+    position: absolute;
+    top: 205px;
+    left: 300px;
+    color: 'white';
+    zIndex: 10;
+    font-size: 60px;
+    font-weight: bold;
+    white-space: nowrap;
     @media (max-width: 768px) {
-      margin: 50px auto 0;
-      width: 100%;
-      height: 150%;
+      position: relative; 
+      top: auto; 
+      left: auto; 
+      transform:
+      font-size: 30px; 
     }
-  }
-
-  .wrapper {
-    ${({ theme }) => theme.mixins.boxShadow};
-    display: block;
-    position: relative;
-    width: 100%;
-    border-radius: var(--border-radius);
-
-    &:hover,
-    &:focus {
-      outline: 0;
-      transform: translate(-4px, -4px);
-
-      &:after {
-        transform: translate(8px, 8px);
-      }
     }
-  }
+    h4{
+      position: absolute;
+      top: 275px;
+    left: 300px;
+    }
+
+
 `;
 const params = {
   cols: 10,
@@ -97,7 +90,7 @@ const params = {
   text: '',
   size: 10,
   scaleMin: 0.5,
-  scaleMax: 10,
+  scaleMax: 1,
   freq: -0.007,
   amp: 0.06,
   frame: 0,
@@ -105,7 +98,7 @@ const params = {
   lineCap: 'butt',
   shape: 'circle',
   color: 'blue',
-  overlay: 'rgb(66, 255, 0)',
+  overlay: 'rgb(48, 61, 68)',
 };
 const PaneContainer = () => {
   const paneRef = useRef(null);
@@ -115,13 +108,13 @@ const PaneContainer = () => {
     let f;
     f = pane.addFolder({ title: 'Firefl-y Grid', expanded: true, });
     f.addBinding(params, 'lineCap', { options: { butt: 'butt', round: 'round', square: 'square' } });
-    f.addBinding(params, 'cols', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
-    f.addBinding(params, 'rows', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
-    f.addBinding(params, 'scaleMin', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
-    f.addBinding(params, 'scaleMax', { min: 1, max: 100, step: 1 }).on('change', () => canvasSketch(sketch, settings));
-    f.addBinding(params, 'overlay'),{color: {type: 'float'}} 
-      
-    
+    f.addBinding(params, 'cols', { min: 1, max: 60, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'rows', { min: 1, max: 60, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'scaleMin', { min: 1, max: 5, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'scaleMax', { min: 1, max: 5, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'overlay'), { color: { type: 'float' } }
+
+
 
     f = pane.addFolder({ title: 'Firefl-y Noise', expanded: true, }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'freq', { min: -0.01, max: 0.01 }).on('change', () => canvasSketch(sketch, settings));
@@ -155,7 +148,7 @@ const PaneContainer = () => {
 };
 const Noise = () => {
   const canvasRef = useRef(null);
-  const skills = ['Three.js', 'canvas-sketch', 'd3.js', 'p5.js'];
+  
 
 
 
@@ -164,7 +157,7 @@ const Noise = () => {
     const context = canvas.getContext('2d');
     const width = canvas.width;
     const height = canvas.height;
-    
+
     const render = ({ frame, scale }) => {
 
       context.clearRect(0, 0, width, height);
@@ -218,13 +211,13 @@ const Noise = () => {
             break;
           case 'rectangle':
             context.rect(w * -0.5, -h * 0.5, w, h);
-            context.strokeStyle =  params.overlay;
+            context.strokeStyle = params.overlay;
             context.stroke();
             break;
           case 'circle':
             context.arc(0, 0, w * 0.5, 0, Math.PI * 2);
-            context.strokeStyle =  params.overlay;
-             context.stroke();
+            context.strokeStyle = params.overlay;
+            context.stroke();
             break;
           case 'spiral':
             const numSpirals = 1; // Número de espirales
@@ -301,35 +294,30 @@ const Noise = () => {
             context.strokeStyle = params.overlay;
             context.stroke();
             break;
-            case 'cone':
-              // Dibujar un contorno básico de cono
-              const coneHeight = w * 0.8; // Altura del cono
-              const coneRadius = w * 0.5; // Radio de la base del cono
-            
-              context.beginPath();
-              // Dibujar la elipse de la base del cono
-              context.ellipse(0, 0, coneRadius, coneRadius * 0.2, 0, 0, Math.PI * 2);
-              // Dibujar los lados del cono
-              context.moveTo(-coneRadius, 0);
-              context.lineTo(0, -coneHeight);
-              context.lineTo(coneRadius, 0);
-              context.strokeStyle = params.overlay;
-              context.stroke();
-              break;
-              case 'sphere':
-                // Dibujar un contorno básico de esfera
-                const sphereRadius = w * 0.4; // Radio de la esfera
-              
-                context.beginPath();
-                // Dibujar dos circunferencias perpendiculares
-                context.arc(0, 0, sphereRadius, 0, Math.PI * 2);
-                context.moveTo(0, -sphereRadius);
-                context.lineTo(0, sphereRadius);
-                context.moveTo(-sphereRadius, 0);
-                context.lineTo(sphereRadius, 0);
-                context.strokeStyle = params.overlay;
-                context.stroke();
-                break;
+          case 'cone':
+
+            const coneHeight = w * 0.8;
+            const coneRadius = w * 0.5;
+            context.beginPath();
+            context.ellipse(0, 0, coneRadius, coneRadius * 0.2, 0, 0, Math.PI * 2);
+            context.moveTo(-coneRadius, 0);
+            context.lineTo(0, -coneHeight);
+            context.lineTo(coneRadius, 0);
+            context.strokeStyle = params.overlay;
+            context.stroke();
+            break;
+          case 'sphere':
+            const sphereRadius = w * 0.4;
+
+            context.beginPath();
+            context.arc(0, 0, sphereRadius, 0, Math.PI * 2);
+            context.moveTo(0, -sphereRadius);
+            context.lineTo(0, sphereRadius);
+            context.moveTo(-sphereRadius, 0);
+            context.lineTo(sphereRadius, 0);
+            context.strokeStyle = params.overlay;
+            context.stroke();
+            break;
           default:
             break;
         }
@@ -338,12 +326,11 @@ const Noise = () => {
     };
 
     const settings = {
-      dimensions: [1000, 1000],
+      dimensions: [900, 900],
       animate: true,
       context: '2d',
       duration: Infinity,
       fps: 32,
-      //   scaleToView: true,
     };
 
     const sketch = () => {
@@ -363,30 +350,24 @@ const Noise = () => {
   }, []);
 
   return (
-    <StyledBannerSection id="#">
-      <h2 className="numbered-heading">Noise</h2>
-      <div className="inner">
-        <StyledText>
-          <div>
-            <p>
-              Toda la potencialidad de canvas-sketch para animaciones y otras herramientas
-            </p>
-            <p>Tecnologías usadas:</p>
-          </div>
-          <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-          </ul>
-          <PaneContainer />
-        </StyledText>
-
-        <StyledPic>
-          <canvas ref={canvasRef} width={600} height={600}></canvas>
-        </StyledPic>
-
-
-
-      </div>
-    </StyledBannerSection>
+    <>
+    
+      <StyledBannerSection id="#">
+        <h2 className="numbered-heading">Noise</h2>
+        <div className="inner">
+          <StyledPic>
+            <canvas ref={canvasRef} width={1200} height={500}></canvas>
+            <div className='panel'>
+              <PaneContainer />
+            </div>
+            {/* <div className='texto' >
+              <p>Firefl-y Animation</p>
+              <h4 className='subtitle'>Control Panel Parameters</h4>
+            </div> */}
+          </StyledPic>
+        </div>
+      </StyledBannerSection>
+    </>
   );
 };
 
