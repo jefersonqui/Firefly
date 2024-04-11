@@ -41,7 +41,7 @@ const StyledPic = styled.div`
   }
 
   canvas {
-    max-width: 850px;
+    max-width: 1200px;
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);  
     @media (max-width: 768px) {     
       width: 400px;
@@ -88,12 +88,12 @@ const StyledPic = styled.div`
 
 `;
 const params = {
-  cols: 10,
-  rows: 10,
+  cols: 1,
+  rows: 1,
   text: '',
-  size: 10,
-  scaleMin: 0.5,
-  scaleMax: 1,
+  size: 4,
+  scaleMin: 1,
+  scaleMax: 3,
   freq: -0.007,
   amp: 0.06,
   frame: 0,
@@ -101,7 +101,8 @@ const params = {
   lineCap: 'butt',
   shape: 'circle',
   color: 'blue',
-  overlay: 'rgb(48, 61, 68)',
+  overlay: 'rgb(48, 59, 65)',
+  overlay2:'rgb(237, 0, 0)',
 };
 const PaneContainer = () => {
   const paneRef = useRef(null);
@@ -111,11 +112,12 @@ const PaneContainer = () => {
     let f;
     f = pane.addFolder({ title: 'Firefl-y Grid', expanded: true, });
     f.addBinding(params, 'lineCap', { options: { butt: 'butt', round: 'round', square: 'square' } });
-    f.addBinding(params, 'cols', { min: 1, max: 60, step: 1 }).on('change', () => canvasSketch(sketch, settings));
-    f.addBinding(params, 'rows', { min: 1, max: 60, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'cols', { min: 1, max: 70, step: 1 }).on('change', () => canvasSketch(sketch, settings));
+    f.addBinding(params, 'rows', { min: 1, max: 70, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'scaleMin', { min: 1, max: 5, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'scaleMax', { min: 1, max: 5, step: 1 }).on('change', () => canvasSketch(sketch, settings));
     f.addBinding(params, 'overlay'), { color: { type: 'float' } }
+    f.addBinding(params, 'overlay2'), { color: { type: 'float' } }
 
 
 
@@ -152,30 +154,25 @@ const PaneContainer = () => {
 const Noise = () => {
   const canvasRef = useRef(null);
 
-
-
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const width = canvas.width;
     const height = canvas.height;
 
+
     const render = ({ frame, scale }) => {
 
       context.clearRect(0, 0, width, height);
-
       const cols = params.cols;
       const rows = params.rows;
       const numCells = cols * rows;
-
       const gridw = width * 0.8;
       const gridh = height * 0.8;
       const cellw = gridw / cols;
       const cellh = gridh / rows;
       const margx = (width - gridw) * 0.5;
       const margy = (height - gridh) * 0.5;
-
       for (let i = 0; i < numCells; i++) {
         const col = i % cols;
         const row = Math.floor(i / cols);
@@ -185,9 +182,6 @@ const Noise = () => {
         const h = cellh * 0.8;
 
         const f = params.animate ? frame : params.frame;
-
-
-        // const n = random.noise2D(x + frame * 20, y, params.freq);
         const n = random.noise3D(x, y, f * 10, params.freq);
         const angle = n * Math.PI * params.amp;
         const scale = mapRange(n, -0.9, 2, params.scaleMin, params.scaleMax);
@@ -203,23 +197,28 @@ const Noise = () => {
         context.lineWidth = scale;
         context.lineCap = params.lineCap;
 
+        const fill = context.createLinearGradient(0, 0, w, h);
+        fill.addColorStop(0, params.overlay);
+        fill.addColorStop(1, params.overlay2);
+
 
         context.beginPath();
         switch (params.shape) {
           case 'square':
             context.moveTo(w * -0.5, 0);
             context.lineTo(w * 0.5, 0);
-            context.strokeStyle = params.overlay;
+            context.strokeStyle =fill ;//context.strokeStyle =params.overlay ;
             context.stroke();
             break;
           case 'rectangle':
             context.rect(w * -0.5, -h * 0.5, w, h);
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'circle':
-            context.arc(0, 0, w * 0.5, 0, Math.PI * 2);
-            context.strokeStyle = params.overlay;
+            
+            context.arc(0, 0, w * 0.3, 0, Math.PI * 2); // *2 completa la circunferencia *0.3 es el tamaño del radio
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'spiral':
@@ -235,7 +234,7 @@ const Noise = () => {
                 const y = radius * Math.sin(angle);
                 context.lineTo(x, y);
               }
-              context.strokeStyle = params.overlay;
+              context.strokeStyle = fill;
               context.stroke();
             }
             break;
@@ -244,7 +243,7 @@ const Noise = () => {
             context.lineTo(w * 0.5, h * 0.5);
             context.lineTo(w * -0.5, h * 0.5);
             context.closePath();
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'pentagon':
@@ -260,7 +259,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'hexagon':
@@ -276,7 +275,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'star':
@@ -294,7 +293,7 @@ const Noise = () => {
               context.lineTo(x, y);
             }
             context.closePath();
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'cone':
@@ -306,7 +305,7 @@ const Noise = () => {
             context.moveTo(-coneRadius, 0);
             context.lineTo(0, -coneHeight);
             context.lineTo(coneRadius, 0);
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           case 'sphere':
@@ -318,7 +317,7 @@ const Noise = () => {
             context.lineTo(0, sphereRadius);
             context.moveTo(-sphereRadius, 0);
             context.lineTo(sphereRadius, 0);
-            context.strokeStyle = params.overlay;
+            context.strokeStyle = fill;
             context.stroke();
             break;
           default:
@@ -359,8 +358,8 @@ const Noise = () => {
         <h2 className="numbered-heading">Noise</h2>
         <div className="inner">
           <StyledPic>
-          <div className='texto' >
-              <p>Firefl-y Animation</p>              
+            <div className='texto' >
+              <p>Firefl-y Animation</p>
             </div>
             <canvas ref={canvasRef} width={1200} height={500}></canvas>
 

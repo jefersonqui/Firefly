@@ -251,7 +251,7 @@ const About = () => {
               <a href="https://platzi.com/"> Startup</a>,{' '}
               <a href="https://scout.camd.northeastern.edu/">y un estudio de diseño dirigido por estudiantes.</a>. Nuestro enfoque
               se centra en la creación de productos y experiencias digitales accesibles e inclusivas.
-              En BAZAR, creemos que la diversidad enriquece nuestra labor y que la tecnología debe reflejar
+              En Firefl-y, creemos que la diversidad enriquece nuestra labor y que la tecnología debe reflejar
               esa diversidad. Trabajamos con una variedad de <a href="https://upstatement.com/">Clientes</a> para llevar sus ideas al mundo digital.
             </p>
 
