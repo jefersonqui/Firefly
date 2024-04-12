@@ -99,9 +99,9 @@ const params = {
   frame: 0,
   animate: true,
   lineCap: 'butt',
-  shape: 'circle',
+  shape: 'spiral',
   color: 'blue',
-  overlay: 'rgb(48, 59, 65)',
+  overlay: 'rgb(0, 255, 6)',
   overlay2:'rgb(237, 0, 0)',
 };
 const PaneContainer = () => {
@@ -223,8 +223,8 @@ const Noise = () => {
             break;
           case 'spiral':
             const numSpirals = 1; // Número de espirales
-            const spiralSpacing = 5; // Espacio entre las espirales
-            const spiralRadius = w * 0.5; // Radio de la espiral
+            const spiralSpacing = 2; // Espacio entre las espirales
+            const spiralRadius = w * 0.3; // Radio de la espiral
 
             for (let i = 0; i < numSpirals; i++) {
               context.beginPath();
@@ -265,7 +265,7 @@ const Noise = () => {
           case 'hexagon':
             // Dibujar un hexágono
             const sidesHexagon = 6; // Número de lados del hexágono
-            const hexagonRadius = w * 0.5; // Radio del hexágono
+            const hexagonRadius = w * 0.2; // Radio del hexágono
 
             context.beginPath();
             for (let i = 0; i <= sidesHexagon; i++) {
@@ -280,9 +280,9 @@ const Noise = () => {
             break;
           case 'star':
             // Dibujar una estrella
-            const numPointsStar = 5; // Número de puntos de la estrella
-            const innerRadiusStar = w * 0.3; // Radio interior de la estrella
-            const outerRadiusStar = w * 0.5; // Radio exterior de la estrella
+            const numPointsStar = 4; // Número de puntos de la estrella
+            const innerRadiusStar = w * 0.1; // Radio interior de la estrella
+            const outerRadiusStar = w * 0.25; // Radio exterior de la estrella
 
             context.beginPath();
             for (let i = 0; i <= numPointsStar * 2; i++) {
@@ -309,10 +309,10 @@ const Noise = () => {
             context.stroke();
             break;
           case 'sphere':
-            const sphereRadius = w * 0.4;
+            const sphereRadius = w * 0.3;
 
             context.beginPath();
-            context.arc(0, 0, sphereRadius, 0, Math.PI * 2);
+            // context.arc(0, 0, sphereRadius, 0, Math.PI * 2);
             context.moveTo(0, -sphereRadius);
             context.lineTo(0, sphereRadius);
             context.moveTo(-sphereRadius, 0);
@@ -362,11 +362,9 @@ const Noise = () => {
               <p>Firefl-y Animation</p>
             </div>
             <canvas ref={canvasRef} width={1200} height={500}></canvas>
-
             <div className='panel'>
               <PaneContainer />
             </div>
-
           </StyledPic>
         </div>
       </StyledBannerSection>
