@@ -44,8 +44,9 @@ const StyledPic = styled.div`
     max-width: 1200px;
     box-shadow: 0 4px 20px rgba(0, 0, 10, 0.2);  
     @media (max-width: 768px) {     
-      width: 400px;
-      height: auto;
+      width: 350px;
+      height: 250px;
+      margin: 0 10px;
     }
   }
   .panel{
@@ -99,7 +100,7 @@ const params = {
   frame: 0,
   animate: true,
   lineCap: 'butt',
-  shape: 'spiral',
+  shape: 'pentagon',
   color: 'blue',
   overlay: 'rgb(0, 255, 6)',
   overlay2:'rgb(237, 0, 0)',
@@ -249,7 +250,7 @@ const Noise = () => {
           case 'pentagon':
             // Dibujar un pentágono
             const sidesPentagon = 5; // Número de lados del pentágono
-            const pentagonRadius = w * 0.5; // Radio del pentágono
+            const pentagonRadius = w * 0.3; // Radio del pentágono
 
             context.beginPath();
             for (let i = 0; i <= sidesPentagon; i++) {
