@@ -42,6 +42,16 @@ module.exports = {
       url: '/#contact',
     },
   ],
+  navLinksComplement: [
+    {
+      name: 'Item5',
+      url: '/#item5',
+    },
+    {
+      name: 'Item6',
+      url: '/#item6',
+    },
+  ],
 
   colors: {
     green: '#64ffda',

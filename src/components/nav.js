@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { css } from 'styled-components';
-import { navLinks } from '@config';
+import { navLinks, navLinksComplement } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
@@ -14,9 +14,9 @@ const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   z-index: 11;
-  padding: 0px 50px;
+  padding: 0px 10px;
   width: 100%;
-  height: var(--nav-height);
+  height: 50px;
   background-color: var(--navy);
   filter: none !important;
   pointer-events: auto !important;
@@ -120,6 +120,13 @@ const StyledLinks = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+  .olLink{
+   
+    margin-left:150px;
+    @media (max-width: 1080px) {
+      margin-left:50px;
+    }
+  }
 
   ol {
     ${({ theme }) => theme.mixins.flexBetween};
@@ -222,14 +229,26 @@ const Nav = ({ isHome }) => {
             {Logo}
 
             <StyledLinks>
-              <ol>
-                {navLinks &&
-                  navLinks.map(({ url, name }, i) => (
-                    <li key={i}>
-                      <Link to={url}>{name}</Link>
-                    </li>
-                  ))}
-              </ol>
+              <div className='olLink'>
+                <ol>
+                  {navLinks &&
+                    navLinks.map(({ url, name }, i) => (
+                      <li key={i}>
+                        <Link to={url}>{name}</Link>
+                      </li>
+                    ))}
+                </ol>
+              </div>
+              <div className='olLink'>
+                <ol>
+                  {navLinksComplement &&
+                    navLinksComplement.map(({ url, name }, i) => (
+                      <li key={i}>
+                        <Link to={url}>{name}</Link>
+                      </li>
+                    ))}
+                </ol>
+              </div>
               <div>{ResumeLink}</div>
             </StyledLinks>
 
@@ -246,7 +265,7 @@ const Nav = ({ isHome }) => {
             </TransitionGroup>
 
             <StyledLinks>
-              <div className='containerlinks'>
+              <div className='olLink'>
                 <ol>
                   <TransitionGroup component={null}>
                     {isMounted &&
@@ -261,7 +280,24 @@ const Nav = ({ isHome }) => {
                   </TransitionGroup>
                 </ol>
               </div>
+            </StyledLinks>
 
+            <StyledLinks>
+              
+                <ol>
+                  <TransitionGroup component={null}>
+                    {isMounted &&
+                      navLinksComplement &&
+                      navLinksComplement.map(({ url, name }, i) => (
+                        <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
+                          <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
+                            <Link to={url}>{name}</Link>
+                          </li>
+                        </CSSTransition>
+                      ))}
+                  </TransitionGroup>
+                </ol>
+              
               <TransitionGroup component={null}>
                 {isMounted && (
                   <CSSTransition classNames={fadeDownClass} timeout={timeout}>
@@ -272,7 +308,6 @@ const Nav = ({ isHome }) => {
                 )}
               </TransitionGroup>
             </StyledLinks>
-
             <TransitionGroup component={null}>
               {isMounted && (
                 <CSSTransition classNames={fadeClass} timeout={timeout}>

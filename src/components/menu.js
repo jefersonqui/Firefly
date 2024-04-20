@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import { navLinks } from '@config';
+import { navLinks, navLinksComplement } from '@config';
 import { KEY_CODES } from '@utils';
 import { useOnClickOutside } from '@hooks';
 
@@ -259,6 +259,17 @@ const Menu = () => {
               {navLinks && (
                 <ol>
                   {navLinks.map(({ url, name }, i) => (
+                    <li key={i}>
+                      <Link to={url} onClick={() => setMenuOpen(false)}>
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              )}
+               {navLinksComplement && (
+                <ol>
+                  {navLinksComplement.map(({ url, name }, i) => (
                     <li key={i}>
                       <Link to={url} onClick={() => setMenuOpen(false)}>
                         {name}
