@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -11,13 +11,17 @@ import { IconLogo, IconHex } from '@components/icons';
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
+
   position: fixed;
   top: 0;
   z-index: 11;
   padding: 0px 10px;
   width: 100%;
   height: 50px;
-  background-color: var(--navy);
+  background-image: ${({ backgroundImage }) => (backgroundImage ? `url(${backgroundImage})` : 'none')};
+
+  background-color: var(--header);
+  opacity: 0.8;
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
@@ -38,7 +42,8 @@ const StyledHeader = styled.header`
     css`
         height: var(--nav-scroll-height);
         transform: translateY(0px);
-        background-color: rgba(10, 25, 47, 0.85);
+        background-color: var(--header);
+        opacity: 0.5;
         box-shadow: 0 10px 30px -10px var(--navy-shadow);
       `};
 
@@ -59,7 +64,7 @@ const StyledNav = styled.nav`
   width: 100%;
   color: var(--lightest-slate);
   font-family: var(--font-mono);
-  counter-reset: item 0;
+  // counter-reset: item 0;
   z-index: 12;
 
   .logo {
@@ -137,13 +142,13 @@ const StyledLinks = styled.div`
     li {
       margin: 0 5px;
       position: relative;
-      counter-increment: item 1;
+      // counter-increment: item 1;
       font-size: var(--fz-xs);
 
       a {
         padding: 10px;
         &:before {
-          content: '0' counter(item) '.';
+          // content: '0' counter(item) '.';
           margin-right: 5px;
           color: var(--green);
           font-size: var(--fz-xxs);
@@ -160,17 +165,67 @@ const StyledLinks = styled.div`
   }
 `;
 
-const Nav = ({ isHome }) => {
+const Nav = ({ isHome}) => {
   const [isMounted, setIsMounted] = useState(!isHome);
+  const [backgroundImage, setBackgroundImage] = useState(null);
   const scrollDirection = useScrollDirection('down');
   const [scrolledToTop, setScrolledToTop] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const pixelatedBackground = useRef(null);
 
   const handleScroll = () => {
     setScrolledToTop(window.pageYOffset < 50);
   };
 
   useEffect(() => {
+    
+    const generatePixelatedBackground = (hexColor) => {
+      const rgbColor = hexToRgb(hexColor);
+      const pixelSize = 1;
+      const spacing = 10;
+
+      const width = pixelatedBackground.current.clientWidth;
+      const height = pixelatedBackground.current.clientHeight;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const rows = Math.ceil(height / (pixelSize + spacing));
+      const cols = Math.ceil(width / (pixelSize + spacing));
+
+      for (let y = 0; y < rows; y++) {
+        const intensity = 1 - y / rows;
+        for (let x = 0; x < cols; x++) {
+          
+          const xPos = x * (pixelSize + spacing);
+          const yPos = y * (pixelSize + spacing);
+          const redValue = Math.round(rgbColor.r * intensity);
+          const greenValue = Math.round(rgbColor.g * intensity);
+          const blueValue = Math.round(rgbColor.b * intensity);
+          ctx.fillStyle = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+          ctx.fillRect(xPos, yPos, pixelSize, pixelSize);
+        }
+      }
+
+      setBackgroundImage(canvas.toDataURL());
+    };
+    const hexToRgb = (hexColor) => {
+      // Eliminar el símbolo '#' si está presente
+      hexColor = hexColor.replace('#', '');
+      
+      // Convertir los valores hexadecimales a enteros
+      const r = parseInt(hexColor.substring(0, 2), 16);
+      const g = parseInt(hexColor.substring(2, 4), 16);
+      const b = parseInt(hexColor.substring(4, 6), 16);
+    
+      return { r, g, b };
+    };
+   
+    
+
     if (prefersReducedMotion) {
       return;
     }
@@ -180,7 +235,7 @@ const Nav = ({ isHome }) => {
     }, 100);
 
     window.addEventListener('scroll', handleScroll);
-
+    generatePixelatedBackground('#FF007F');
     return () => {
       clearTimeout(timeout);
       window.removeEventListener('scroll', handleScroll);
@@ -222,8 +277,14 @@ const Nav = ({ isHome }) => {
   );
 
   return (
-    <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
+    <StyledHeader scrollDirection={scrollDirection} 
+    scrolledToTop={scrolledToTop}
+    ref={pixelatedBackground} 
+    backgroundImage={backgroundImage}
+   >
+      
       <StyledNav>
+     
         {prefersReducedMotion ? (
           <>
             {Logo}
@@ -250,6 +311,7 @@ const Nav = ({ isHome }) => {
                 </ol>
               </div>
               <div>{ResumeLink}</div>
+              
             </StyledLinks>
 
             <Menu />

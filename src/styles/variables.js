@@ -6,16 +6,17 @@ const variables = css`
 
 
     --green-tint: rgba(100, 255, 218, 0.1);
+    --header: #090909;
     --pink: #f57dff;
     --blue: #57cbff;
-    --dark-navy: #020c1b;
-    --navy: #0a192f; //Color de Fondo
-    --light-navy: #112240;
-    --lightest-navy: #233554;
+    --dark-navy:  #020c1b;
+    --navy: #F0F7F4; //Color de Fondo #0a192f
+    --light-navy: #3C493F;// color cajas texto #112240; 
+    --lightest-navy: #233554; #color lineas
     --navy-shadow: rgba(2, 12, 27, 0.7);
-    --dark-slate: #495670;
-    --slate: #8892b0;
-    --light-slate: #a8b2d1;
+    --dark-slate:#495670; //slider
+    --slate: 040303;//#8892b0; texto  o letra grande
+    --light-slate: #F0F7F4;//#a8b2d1; parrafos
     --lightest-slate: #ccd6f6;
     --white: #e6f1ff;
     --green: #ffe108;
@@ -27,8 +28,8 @@ const variables = css`
       sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
-    --fz-xxs: 11px;
-    --fz-xs: 12px;
+    --fz-xxs: 14px; //color numeros
+    --fz-xs: 14px; //Color items
     --fz-sm: 14px;
     --fz-md: 16px;
     --fz-lg: 16px;
@@ -38,7 +39,7 @@ const variables = css`
 
     --border-radius: 4px;
     --nav-height: 100px;
-    --nav-scroll-height: 70px;
+    --nav-scroll-height: 50px;
 
     --tab-height: 42px;
     --tab-width: 120px;
