@@ -6,30 +6,31 @@ const variables = css`
 
 
     --green-tint: rgba(100, 255, 218, 0.1);
-    --header: #090909;
+    --header: rgba(255, 255, 255, 0.3);//#090909;
     --pink: #f57dff;
     --blue: #57cbff;
-    --dark-navy:  #020c1b;
-    --navy: #F0F7F4; //Color de Fondo #0a192f
+    --dark-navy:  #FFFFFF;
+    --navy: #C2E812;//#EAF9D9; //Color de Fondo #0a192f
     --light-navy: #3C493F;// color cajas texto #112240; 
     --lightest-navy: #233554; #color lineas
     --navy-shadow: rgba(2, 12, 27, 0.7);
     --dark-slate:#495670; //slider
-    --slate: 040303;//#8892b0; texto  o letra grande
+    --slate: #040303;//#8892b0; texto  o letra grande
     --light-slate: #F0F7F4;//#a8b2d1; parrafos
     --lightest-slate: #ccd6f6;
     --white: #e6f1ff;
-    --green: #ffe108;
+    --green: #001011;//#ffe108;
     --green-tint: rgba(100, 255, 218, 0.1);
     --pink: #f57dff;
     --blue: #57cbff;
+    --items: #040303
 
     --font-sans:'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui,
       sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
-    --fz-xxs: 14px; //color numeros
-    --fz-xs: 14px; //Color items
+    --fz-xxs: 14px; //tamaño numeros
+    --fz-xs: 14px; //tamaño items
     --fz-sm: 14px;
     --fz-md: 16px;
     --fz-lg: 16px;

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Layout, Hero, About, Jobs, Featured, Projects, Contact } from '@components';
 import Banner from '../components/sections/banner'
 import Noise from '../components/sections/noise';
-import Conections from '../components/sections/conections';
 
 
 const StyledMainContainer = styled.main`
@@ -19,7 +18,7 @@ const IndexPage = ({ location }) => (
       <About />
       {/* <Banner /> */}
       {/* <Noise/> */}
-      <Conections/>
+      
       <Jobs />
       {/* <Featured /> */}
       {/* <Projects /> */}

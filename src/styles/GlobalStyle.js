@@ -129,10 +129,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &.fillHeight {
-      padding: 0 150px;
+      padding: 0 0px; // padding laterales Section Dom 
 
       @media (max-width: 1080px) {
-        padding: 0 100px;
+        padding: 0 20px;
       }
       @media (max-width: 768px) {
         padding: 0 50px;
